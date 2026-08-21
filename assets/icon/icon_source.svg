@@ -1,0 +1,109 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background radial gradient bgMid→bgDeep -->
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#1C1200"/>
+      <stop offset="100%" stop-color="#090806"/>
+    </radialGradient>
+    <!-- Gold glow filter for QR markers -->
+    <filter id="goldGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Soft glow for rays -->
+    <filter id="rayGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Text gradient wordmark gold→white→ember -->
+    <linearGradient id="wordmarkGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#FFB700"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FF6B00"/>
+    </linearGradient>
+    <!-- Neon line gradient -->
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFB700"/>
+      <stop offset="100%" stop-color="#FF6B00"/>
+    </linearGradient>
+    <!-- Text glow filter -->
+    <filter id="textGlow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Squircle background rx=220 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="url(#bgGrad)"/>
+
+  <!-- ===== LIGHT RAYS from center (512,460) ===== -->
+  <g filter="url(#rayGlow)" opacity="0.75">
+    <!-- Ray 1: up-left -->
+    <line x1="512" y1="460" x2="260" y2="220" stroke="#FFB700" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ray 2: up -->
+    <line x1="512" y1="460" x2="512" y2="190" stroke="#FFD649" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ray 3: up-right -->
+    <line x1="512" y1="460" x2="764" y2="220" stroke="#FFB700" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ray 4: left -->
+    <line x1="512" y1="460" x2="210" y2="460" stroke="#FF9A3C" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Ray 5: right -->
+    <line x1="512" y1="460" x2="814" y2="460" stroke="#FF9A3C" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Ray 6: down-left (short, blocked by QR area) -->
+    <line x1="512" y1="460" x2="340" y2="650" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+    <!-- Ray 7: down-right -->
+    <line x1="512" y1="460" x2="684" y2="650" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  </g>
+
+  <!-- ===== QR CORNER MARKERS ===== -->
+  <!-- QR area: 260x260 centered at 512,460 → from 382,330 to 642,590 -->
+  <!-- Marker size: 70x70 outer, 46x46 mid clear, 30x30 inner -->
+
+  <!-- Top-left marker at (382,330) -->
+  <g filter="url(#goldGlow)">
+    <!-- Outer square -->
+    <rect x="382" y="330" width="70" height="70" rx="6" fill="none" stroke="#FFB700" stroke-width="8"/>
+    <!-- Inner filled square -->
+    <rect x="406" y="354" width="22" height="22" rx="2" fill="#FFB700"/>
+  </g>
+
+  <!-- Top-right marker at (572,330) -->
+  <g filter="url(#goldGlow)">
+    <rect x="572" y="330" width="70" height="70" rx="6" fill="none" stroke="#FFD649" stroke-width="8"/>
+    <rect x="596" y="354" width="22" height="22" rx="2" fill="#FFD649"/>
+  </g>
+
+  <!-- Bottom-left marker at (382,520) -->
+  <g filter="url(#goldGlow)">
+    <rect x="382" y="520" width="70" height="70" rx="6" fill="none" stroke="#FFB700" stroke-width="8"/>
+    <rect x="406" y="544" width="22" height="22" rx="2" fill="#FFB700"/>
+  </g>
+
+  <!-- Central dot (camera/source) -->
+  <circle cx="512" cy="460" r="10" fill="#FFD649" filter="url(#goldGlow)"/>
+  <circle cx="512" cy="460" r="5" fill="#FFFFFF"/>
+
+  <!-- ===== WORDMARK "ЛII" ===== -->
+  <text
+    x="512"
+    y="880"
+    font-family="'Arial Black', 'Noto Sans', sans-serif"
+    font-size="220"
+    font-weight="900"
+    text-anchor="middle"
+    fill="url(#wordmarkGrad)"
+    filter="url(#textGlow)"
+    letter-spacing="-8"
+  >ЛII</text>
+
+  <!-- ===== Decorative neon line below wordmark ===== -->
+  <rect x="280" y="930" width="464" height="6" rx="3" fill="url(#lineGrad)" opacity="0.9"/>
+</svg>
